@@ -29,13 +29,8 @@
 
 package org.firstinspires.ftc.teamcode;
 
-import static java.lang.Math.abs;
-
-import androidx.appcompat.app.ActionBar;
-
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -58,10 +53,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
  */
 
-@Disabled
-@Autonomous (name="Auto 1", group="Linear OpMode")
+@Autonomous (name="Red (Place and Park)", group="Linear OpMode")
 
-public class Auto2023 extends LinearOpMode {
+public class Red_Place_and_Park extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
@@ -93,7 +87,7 @@ public class Auto2023 extends LinearOpMode {
     boolean decreased = false;
 
     // Limits
-    double topLimit = 3500;
+    double topLimit = 4500;
     double bottomLimit = 20;
     double collectionLimit = 200;
 
@@ -139,6 +133,9 @@ public class Auto2023 extends LinearOpMode {
         while (opModeIsActive()) {
 
             // Auto Starts
+            driveForwardUsingEncoders(15,.4,2);
+            controlIntake(-.5, 3);
+            strafeLeftUsingEncoders(27,.4,4);
             // Auto Ends
             break;
 
@@ -305,6 +302,21 @@ public class Auto2023 extends LinearOpMode {
 
         leftSlideMotor.setPower(0);
         rightSlideMotor.setPower(0);
+
+    }
+
+    public void controlIntake(double intakeSpeed, double timeout) {
+
+        double initalTime = runtime.time();
+        double time = timeout;
+
+        while (runtime.time() < initalTime + timeout) {
+
+            intake.setPower(intakeSpeed);
+
+        }
+
+        intake.setPower(0);
 
     }
 
