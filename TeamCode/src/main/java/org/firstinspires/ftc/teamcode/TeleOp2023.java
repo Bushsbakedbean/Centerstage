@@ -36,7 +36,7 @@ public class TeleOp2023 extends LinearOpMode {
     // Limits
     double topLimit = 3000;
     double bottomLimit = 20;
-    double collectionLimit = 200;
+    double collectionLimit = 150;
 
     // PID Values
     double armP = .008;
@@ -125,7 +125,7 @@ public class TeleOp2023 extends LinearOpMode {
                 leftSlideMotor.setPower(PIDControl(topLimit, leftSlideMotor.getCurrentPosition(), armP, armI, armD) * .6);
                 rightSlideMotor.setPower(PIDControl(topLimit, leftSlideMotor.getCurrentPosition(), armP, armI, armD) * .6);
 
-            } else if (gamepad2.b) {
+            } else if (gamepad2.b && gamepad2.start == false) {
 
                 leftSlideMotor.setPower(PIDControl(collectionLimit, leftSlideMotor.getCurrentPosition(), armP, armI, armD) * .5);
                 rightSlideMotor.setPower(PIDControl(collectionLimit, leftSlideMotor.getCurrentPosition(), armP, armI, armD) * .5);
